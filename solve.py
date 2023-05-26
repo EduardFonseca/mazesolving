@@ -79,8 +79,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-m", "--method", nargs='?', const=sf.Default, default=sf.Default,
                         choices=sf.Choices)
-    parser.add_argument("input_file")
-    parser.add_argument("output_file")
+    parser.add_argument("input_file", nargs='?', default="examples/normal.png")
+    parser.add_argument("output_file", nargs='?', default = "teste.png")
     args = parser.parse_args()
 
     solve(sf, args.method, args.input_file, args.output_file)

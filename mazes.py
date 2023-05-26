@@ -1,6 +1,7 @@
 class Maze:
     class Node:
         def __init__(self, position):
+            '''Cria um no com a posicao dada e inicializa os vizinhos como None'''
             self.Position = position
             self.Neighbours = [None, None, None, None]
             #self.Weights = [0, 0, 0, 0]
@@ -9,23 +10,28 @@ class Maze:
 
         width = im.size[0]
         height = im.size[1]
-        data = list(im.getdata(0))
+        #extrai todos os pixels da imagem em um so array de comprimento width*height
+        data = list(im.getdata(0)) 
 
         self.start = None
         self.end = None
 
         # Top row buffer
-        topnodes = [None] * width
+        #cria um array de width elementos, cada um com valor None
+        topnodes = [None] * width 
         count = 0
 
         # Start row
+        # ignora a primeira e ultima linha e coluna pois eles sao sempre parede [0]
         for x in range (1, width - 1):
+            # se algum dos nos da primeira linha for caminho, cria um no e o coloca como start
             if data[x] > 0:
                 self.start = Maze.Node((0,x))
                 topnodes[x] = self.start
                 count += 1
                 break
-
+            
+        # ignora a primeira e ultima linha e coluna pois eles sao sempre parede [0] exceto pela entrada e saida que sao feitos separadamente
         for y in range (1, height - 1):
             #print ("row", str(y)) # Uncomment this line to keep a track of row progress
 
